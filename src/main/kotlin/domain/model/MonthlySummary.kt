@@ -1,8 +1,8 @@
 package umg.edu.gt.domain.model
 
-data class MonthlySummary (
+data class MonthlySummary(
     val totalIncome: Double,
-    val totalExpenses: Double,
+    val totalExpenses: Double,            // <-- Termina en 's' (plural)
     val netBalance: Double,
-    val impulseExpenseTotal: Double
+    val impulseExpensesTotal: Double       // <-- O impulseExpenseTotal, según corresponda
 )
