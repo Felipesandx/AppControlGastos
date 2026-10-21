@@ -9,6 +9,6 @@ data class Transaction(
     val date: String, //Para formato yyyy-MM-dd
     val timestamp: Long, // Para ordenar calculos de rango
     val type: TransactionType,
-    val categoryId: Long? = null,
-    val isImpulse: Boolean = false // Diferenciador: compras por impulso
+    val category: Category = Category.OTHER,
+    val isImpulse: Boolean = false
 )
