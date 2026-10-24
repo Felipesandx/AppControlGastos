@@ -4,7 +4,9 @@ import umg.edu.gt.domain.model.MonthlySummary
 import umg.edu.gt.domain.model.Transaction
 import umg.edu.gt.domain.model.TransactionType
 import umg.edu.gt.domain.repository.TransactionRepository
+import umg.edu.gt.domain.model.UserProfile
 import java.util.Locale
+
 
 class FinanceService(private val repository: TransactionRepository) {
 
@@ -52,4 +54,10 @@ class FinanceService(private val repository: TransactionRepository) {
 
     fun formatCurrency(amount: Double): String =
         String.format(Locale.US, "Q %.2f", amount)
+
+    fun calculateDailySafeToSpend(profile: UserProfile, totalExpensesThisMonth: Double, daysRemainingInMonth: Int): Double {
+        val remainingBudget = profile.monthlyBudget - totalExpensesThisMonth
+        if (remainingBudget <= 0.0 || daysRemainingInMonth <= 0) return 0.0
+        return remainingBudget / daysRemainingInMonth
+    }
 }
