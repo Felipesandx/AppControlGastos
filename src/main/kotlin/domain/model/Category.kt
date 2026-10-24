@@ -7,6 +7,7 @@ enum class Category (val displayName: String){
     HEALTH("Salud"),
     ENTERTAINMENT("Ocio"),
     SALARY("Salario / Ingreso"),
+    SERVICES(displayName = "Servicio"),
     OTHER("Otros");
 
     override fun toString(): String = displayName
