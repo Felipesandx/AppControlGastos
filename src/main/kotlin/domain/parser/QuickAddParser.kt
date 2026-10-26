@@ -39,7 +39,8 @@ object QuickAddParser {
             listOf("comida", "almuerzo", "cena", "tacos", "cafe", "café", "pizza", "restaurante", "super").any { lower.contains(it) } -> Category.FOOD
             listOf("uber", "gasolina", "gas", "bus", "taxi", "parqueo", "peaje").any { lower.contains(it) } -> Category.TRANSPORT
             listOf("cine", "juego", "salida", "fiesta", "bar", "steam").any { lower.contains(it) } -> Category.ENTERTAINMENT
-            listOf("luz", "agua", "internet", "renta", "teléfono", "telefono").any { lower.contains(it) } -> Category.SERVICES
+            listOf("pastillas", "medicina", "jarabe", "medicamentos", "consulta", "dentista").any { lower.contains(it) } -> Category.HEALTH
+            listOf("pastillas", "mensualidad", "lapiz", "cuaderno", "regla", "mochila").any { lower.contains(it) } -> Category.STUDIES
             else -> Category.OTHER
         }
     }
