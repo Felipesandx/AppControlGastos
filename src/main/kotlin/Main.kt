@@ -1,5 +1,3 @@
-package umg.edu.gt
-
 import kotlinx.coroutines.runBlocking
 import umg.edu.gt.data.repository.InMemoryTransactionRepository
 import umg.edu.gt.domain.model.Category
@@ -8,34 +6,28 @@ import umg.edu.gt.domain.model.TransactionType
 import umg.edu.gt.domain.service.FinanceService
 
 fun main() = runBlocking {
-    val service = FinanceService(InMemoryTransactionRepository())
+    val repository = InMemoryTransactionRepository()
+    val service = FinanceService(repository)
 
-    println("--- Test de Librería de Finanzas ---")
+    // Simulam un usuario en sesión
+    val activeUserId = 1L
 
-    service.register(
-        Transaction(
-            amount = 3500.0,
-            description = "Pago de Quincena",
-            date = "2026-10-15",
-            timestamp = System.currentTimeMillis(),
-            type = TransactionType.INCOME,
-            category = Category.SALARY
-        )
+    val t1 = Transaction(
+        id = 0,
+        userId = activeUserId, // Nuevo campo
+        amount = 25.0,
+        description = "Café",
+        date = "25 Oct 2026",
+        timestamp = System.currentTimeMillis(),
+        type = TransactionType.EXPENSE,
+        category = Category.FOOD,
+        isImpulse = true // Nuevo campo
     )
 
-    service.register(
-        Transaction(
-            amount = 45.0,
-            description = "Almuerzo",
-            date = "2026-10-15",
-            timestamp = System.currentTimeMillis(),
-            type = TransactionType.EXPENSE,
-            category = Category.FOOD
-        )
-    )
+    service.register(t1)
 
-    val summary = service.getMonthlySummary()
-    println("Ingresos: " + service.formatCurrency(summary.totalIncome))
-    println("Gastos:   " + service.formatCurrency(summary.totalExpenses)) // Con 's' al final
-    println("Balance:  " + service.formatCurrency(summary.netBalance))
+    // Llamada al servicio pasando el usuario
+    val summary = service.getMonthlySummary(activeUserId)
+
+    println("Balance neto del usuario $activeUserId: Q ${summary.netBalance}")
 }
