@@ -27,4 +27,8 @@ class InMemoryTransactionRepository : TransactionRepository {
 
     override suspend fun delete(id: Long): Boolean =
         transactions.removeIf { it.id == id }
+
+    override suspend fun deleteAll() {
+        transactions.clear()
+    }
 }

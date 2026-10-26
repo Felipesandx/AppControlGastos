@@ -60,4 +60,7 @@ class FinanceService(private val repository: TransactionRepository) {
         if (remainingBudget <= 0.0 || daysRemainingInMonth <= 0) return 0.0
         return remainingBudget / daysRemainingInMonth
     }
+    suspend fun wipeAllData() {
+        repository.deleteAll()
+    }
 }
